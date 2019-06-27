@@ -61,7 +61,7 @@ class App extends Component {
   }
   render(){
     return (
-      <div className="App">
+      <div className={!this.state.isLoading ? "App" : "App--loading"}>
         {this.state.isLoading?
         <div>Now loading</div>
         :
