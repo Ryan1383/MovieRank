@@ -1,8 +1,8 @@
 import React , {Component} from 'react';
 import './App.css';
 import Movie from './Movie';
-
-const MOVIE_LIST_URI = 'https://yts.lt/api/v2/list_movies.json?quality=3D?sort_by=';
+const LOADING_TEXT = 'Now Loading'
+const MOVIE_LIST_URI = 'https://yts.lt/api/v2/list_movies.json?quality=3D';
 class App extends Component {
 
   constructor(props){
@@ -11,6 +11,7 @@ class App extends Component {
     this.state ={
       movies : [],
       isLoading: true,
+      indicatorText:LOADING_TEXT,
     }
   }
   componentDidMount(){
@@ -26,7 +27,8 @@ class App extends Component {
   }
 
   getAPIMovies =()=>{
-    fetch(`${MOVIE_LIST_URI}rating`)
+    this.makeLoadingIncicator();
+    fetch(`${MOVIE_LIST_URI}`)
     .then(res => res.json())
     .then(res =>{
       console.log(res);
@@ -37,9 +39,9 @@ class App extends Component {
         this.setState({
           movies : movies,
           isLoading: false,
-        })
+        });
       }else{
-        console.log('Movies has not data');
+        console.log('has not data');
       }
       
     })
@@ -59,16 +61,38 @@ class App extends Component {
     return movies;  
     
   }
+
+  makeLoadingIncicator =()=>{
+    let dot = '.';
+    let dotArr = ['.'];
+    let repeat = setInterval(()=>{
+        if(this.state.isLoading){
+          if(dotArr.length <4){    
+              this.setState({
+                indicatorText:LOADING_TEXT+dotArr.join(''),
+              })
+              dotArr.push(dot);
+          }else{
+            dotArr=[dot];
+            this.setState({
+              indicatorText:LOADING_TEXT,
+            })
+          }
+        }else{
+          clearInterval(repeat);
+        }
+      },300)
+  }
   render(){
     return (
-      <div className={!this.state.isLoading ? "App" : "App--loading"}>
-        {this.state.isLoading?
-        <div>Now loading</div>
-        :
-         this._renderItems()
-      }
+       <div className={!this.state.isLoading ? "App" : "App--loading"}>
+         {this.state.isLoading?
+        <div>{this.state.indicatorText}</div>
+         :
+          this._renderItems()
+       }
 
-      </div>
+       </div>
     );
   }
 }
