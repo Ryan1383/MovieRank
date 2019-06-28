@@ -17,6 +17,20 @@
     text-overflow: ellipsis;
 }
 
+.Movie__Header {
+    display: flex;
+
+}
+.Movie__Rating {
+    display: flex;
+    align-items: center;
+    margin-Left:5px;
+}
+.Movie__Rating span{
+    padding-left: 5px;
+}
+
+
 .Movie__Column:last-child{
     padding:20px 0;
     width:60%;
@@ -50,7 +64,22 @@
     top:-20px;
     box-shadow: -10px 19px 38px rgba(83, 83, 83, 0.3), 10px 15px 12px rgba(80,80,80,0.22);
 }
-
+.Poster__Scale {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transition: all 0.3s ease-in-out;   
+  }
+  .Poster__Scale:hover {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    cursor: pointer;
+  }
 @media screen and (min-width:320px) and (max-width:667px){
     .Movie{
         width:100%;

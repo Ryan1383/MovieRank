@@ -1,6 +1,8 @@
 import React , {Component} from 'react';
-import './App.css';
+import './css/App.css';
 import Movie from './Movie';
+import Header from './Header';
+
 const LOADING_TEXT = 'Now Loading'
 const MOVIE_LIST_URI = 'https://yts.lt/api/v2/list_movies.json?quality=3D';
 class App extends Component {
@@ -12,6 +14,7 @@ class App extends Component {
       movies : [],
       isLoading: true,
       indicatorText:LOADING_TEXT,
+
     }
   }
   componentDidMount(){
@@ -20,15 +23,17 @@ class App extends Component {
 
   _setMovies =async()=>{
     const movies = await this._callAPIMovies();
-    this.setState({
-      movies:movies,
-      isLoading:false,
-    })
+    this.setState(
+      {
+        movies:movies,
+        isLoading:false,
+      }
+    )
   }
 
   getAPIMovies =()=>{
     this.makeLoadingIncicator();
-    fetch(`${MOVIE_LIST_URI}`)
+    fetch(`https://yts.lt/api/v2/list_movies.json?limit=${40}&page=${1}&genre=drama`)
     .then(res => res.json())
     .then(res =>{
       console.log(res);
@@ -85,14 +90,19 @@ class App extends Component {
   }
   render(){
     return (
-       <div className={!this.state.isLoading ? "App" : "App--loading"}>
-         {this.state.isLoading?
-        <div>{this.state.indicatorText}</div>
-         :
-          this._renderItems()
-       }
+      <div >
+          <Header/>
+        <div className={!this.state.isLoading ? "App" : "App--loading"}>
+          {this.state.isLoading?
+          <div>{this.state.indicatorText}</div>
+          :
+            this._renderItems()
+            
+        }
 
-       </div>
+        </div>
+      </div>
+
     );
   }
 }
