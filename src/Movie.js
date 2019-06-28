@@ -1,6 +1,7 @@
 import React, {Component}from 'react';
 import LinesEllipsis from 'react-lines-ellipsis'
-import './Movie.css';
+import Star from './images/star.png'
+import './css/Movie.css';
 
 class Movie extends Component {
 
@@ -15,13 +16,25 @@ class Movie extends Component {
                     />
                 </div>
                 <div className="Movie__Column">
-                    <h1>{movie.title}</h1>
+                    <div className="Movie__Header">
+                        <h1>{movie.title}</h1>
+                        <div className="Movie__Rating">
+                            <img 
+                                src={Star}
+                                style={{height:15,width:15}}
+                                alt={'Rating star'}
+                            />
+                            <span>{movie.rating}</span>
+                        </div>
+                    </div>
                     <div className="Movie__Genres">
                         {movie.genres.map((genre,index) =>{
-                            return(<MovieGenres
-                                genre ={genre}
-                                key={index}
-                            />)
+                            return(
+                                <MovieGenres
+                                    genre ={genre}
+                                    key={index}
+                                />
+                            )
                         })}
                     </div>
                     <div className="Movie__Synopsis">
@@ -44,7 +57,7 @@ function MovieGenres({genre}){
 function MoviePoster({posterImg,alt}) {
     return(
         <img 
-            className="Movie__Poster"
+            className="Movie__Poster Poster__Scale"
             title={alt}
             src ={posterImg}
             alt={alt}
