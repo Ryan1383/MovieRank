@@ -22,7 +22,8 @@ class Movie extends Component {
     componentDidMount(){
         // 상세화면으로 이동 후에 다시 목록 페이지로 돌아갈경우 loading창이 뜨게 되는데 이때 상태관리(redux)의 필요성을 느낌
         // 상세화면 이동 -> 뒤로가기 -> 기존에 받아온 데이터를 저장한 객체를 기반으로 렌더를 함으로서 성능 향상을 야기
-            this.getAPIMovies();
+        this.getAPIMovies();
+        
     }
 
     _setMovies = async()=>{
@@ -34,8 +35,7 @@ class Movie extends Component {
     }
 
     getAPIMovies =()=>{
-       
-        fetch(`https://yts.lt/api/v2/list_movies.json?limit=${20}&page=${1}&genre=drama`)
+        fetch(`https://yts.lt/api/v2/list_movies.xml?sort=seeds&limit=15`)
         .then(res => res.json())
         .then(res =>{
           console.log(res);
@@ -82,14 +82,14 @@ class Movie extends Component {
                         </div>
                     </div>
                     <div className="Movie__Genres">
-                        {movie.genres.map((genre,index) =>{
-                            return(
+                        {movie.genres.map((genre,index) =>
+                            (
                                 <MovieGenres
                                     genre ={genre}
                                     key={index}
                                 />
                             )
-                        })}
+                        )}
                     </div>
                     <div className="Movie__Synopsis">
                         <LinesEllipsis
