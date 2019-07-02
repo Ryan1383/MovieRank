@@ -1,10 +1,16 @@
 .Movie__detail {
     padding:30px;
+}
+.Movie__detail_container {
     display: flex;
 }
 
 .Movie__poster {
   
+}
+
+.Movie__info {
+    width: 60%;
 }
 
 .Movie__title {
@@ -27,4 +33,18 @@
 
 }
 
+
+.Movie__cast {
+    width:40%;
+} 
+
+.Movie__trailer {
+}
+
+
+@media screen and (min-width:320px) and (max-width:667px){
+    .Movie__detail_container{
+        display: block;        
+    }
+}
 

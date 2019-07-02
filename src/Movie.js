@@ -1,7 +1,7 @@
 import React, {Component}from 'react';
 import LinesEllipsis from 'react-lines-ellipsis'
 import {Link} from 'react-router-dom';
-
+import { URL_IMG, IMG_SIZE_LARGE } from './const';
 import Star from './images/star.png'
 import './css/Movie.css';
 import './css/App.css'
@@ -26,36 +26,24 @@ class Movie extends Component {
         
     }
 
-    _setMovies = async()=>{
-        const movies = await this._callAPIMovies();
-        this.setState({
-                movies:movies,
-                isLoading:false,
-        });
-    }
-
     getAPIMovies =()=>{
-        fetch(`https://yts.lt/api/v2/list_movies.xml?sort=seeds&limit=15`)
-        .then(res => res.json())
+        fetch('https://api.themoviedb.org/3/discover/movie?api_key=4d4ed145d3584846f5922b6a467e1f85&page=1')
+        .then(res => res.json()
         .then(res =>{
-          console.log(res);
-          let movies = res.data.movies;
+          console.log('resgo>>>>>',res);
+          let movies = res.results;
     
-          if( movies != null){
-            console.log('data received successfully')
             this.setState({
               movies : movies,
               isLoading: false,
-            });
-          }else{
-            console.log('has not data');
-          }
+            },()=>console.log(this.state.movies));
           
-        })
+        }
+        )
         .catch(err =>{
           console.log(err);
         })
-      }
+        )}
 
       _renderItems =()=>{
         return(
@@ -64,7 +52,7 @@ class Movie extends Component {
                 <div className="Movie__Column">
                     <Link to={`/${movie.id}`}>
                         <MoviePoster 
-                            posterImg = {movie.medium_cover_image}
+                            posterImg = {URL_IMG+IMG_SIZE_LARGE+movie.poster_path}
                             alt={movie.title}
                         />
                     </Link>
@@ -78,11 +66,11 @@ class Movie extends Component {
                                 style={{height:15,width:15}}
                                 alt={'Rating star'}
                             />
-                            <span>{movie.rating}</span>
+                            <span>{movie.vote_average}</span>
                         </div>
                     </div>
                     <div className="Movie__Genres">
-                        {movie.genres.map((genre,index) =>
+                        {movie.genre_ids.map((genre,index) =>
                             (
                                 <MovieGenres
                                     genre ={genre}
@@ -91,7 +79,7 @@ class Movie extends Component {
                             )
                         )}
                     </div>
-                    <div className="Movie__Synopsis">
+                    {/* <div className="Movie__Synopsis">
                         <LinesEllipsis
                             text={movie.synopsis}
                             maxLine='3'
@@ -99,7 +87,7 @@ class Movie extends Component {
                             trimRight
                             basedOn='letters'
                             />   
-                    </div>
+                    </div> */}
                 </div>
             </div>
             
@@ -120,7 +108,7 @@ class Movie extends Component {
     }
 }
 function MovieGenres({genre}){
-    return<span className="Movie__Genre">{genre}</span>
+    return<span className="Movie__Genre">{genre.name}</span>
 }
 function MoviePoster({posterImg,alt}) {
     return(
