@@ -1,0 +1,17 @@
+.Movie__trailer {
+    margin-top: 30px;
+    padding:10px 0px;
+}
+
+.Trailer__content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+@media screen and (min-width:320px) and (max-width:667px){
+    .Trailer__content{
+        display: block;        
+    }
+}
