@@ -1,3 +1,10 @@
+h1,h2 {
+    padding-top: 0;
+    margin-top:0;
+}
+
+
+
 .Movie__detail {
     padding:30px;
 }
@@ -5,46 +12,66 @@
     display: flex;
 }
 
-.Movie__poster {
-  
-}
-
 .Movie__info {
-    width: 60%;
-}
-
-.Movie__title {
-
+    width: 70%;
+    padding: 0px 20px 20px 20px ;
 }
 
 .Movie__rating {
 
 }
 
-.Movie__year {
-
-}
 
 .Movie__runtime {
     
 }
 
 .Movie__genres {
-
+    margin: 10px 0px;
+}
+.Movie__genre {
+    margin:10px 10px;
+    margin-left: 0px;
 }
 
+.Movie__overview {
+   
+}
 
 .Movie__cast {
-    width:40%;
+    width:30%;
+    align-items: center;
+    justify-content: center;
 } 
 
-.Movie__trailer {
+.Cast__profile {
+    margin: 10px 0px;
+    display: flex;
+    align-items: center;
 }
+
+
+
 
 
 @media screen and (min-width:320px) and (max-width:667px){
     .Movie__detail_container{
         display: block;        
     }
+    .Movie__poster {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+    .Movie__cast {
+        width:100%;
+    } 
+    .Movie__info {
+        width: 100%;
+        padding:20px 0px;
+    }
+
+   
 }
 

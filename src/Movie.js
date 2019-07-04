@@ -1,5 +1,4 @@
 import React, {Component}from 'react';
-import LinesEllipsis from 'react-lines-ellipsis'
 import {Link} from 'react-router-dom';
 import { URL_IMG, IMG_SIZE_LARGE } from './const';
 import Star from './images/star.png'
