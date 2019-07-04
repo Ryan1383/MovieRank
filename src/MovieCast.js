@@ -1,7 +1,7 @@
 // https://api.themoviedb.org/3/discover/movie?api_key=4d4ed145d3584846f5922b6a467e1f85&with_cast=973667
 import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import { URL_IMG, IMG_SIZE_LARGE,IMG_SIZE_SMALL } from './const';
+import { URL_IMG, IMG_SIZE_LARGE,API_KEY } from './const';
 import './css/MovieDetail.css';
 import Loading from './Loading';
 
@@ -14,7 +14,7 @@ function MovieCast ({match}) {
    
 
     const getAPIMovieDetail =async()=>{
-       await fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=4d4ed145d3584846f5922b6a467e1f85`)
+       await fetch(`https://api.themoviedb.org/3/movie/${movie.id}${API_KEY}`)
         .then(res => res.json())
         .then(res =>{
             console.log('getAPIMovieDetail >>>>',res);       

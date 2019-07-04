@@ -1,12 +1,13 @@
 import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import { URL_IMG, IMG_SIZE_LARGE,API_KEY } from './const';
+import { URL_IMG, IMG_SIZE_LARGE,API_KEY,CAST_MAX_NUM } from './const';
 import './css/MovieDetail.css';
 import Loading from './Loading';
 import Star from './images/star.png'
 import MovieCastProfile from './MovieCastProfile';
 import MovieTrailer from './MovieTrailer';
 import MovieReviews from './MovieRevies';
+import MovieSuggestion from './MovieSuggestion';
 
 
 function MovieDetail ({match}) {
@@ -28,7 +29,7 @@ function MovieDetail ({match}) {
     const [detailLoading, setDetailLoading] = useState(true);
     const [castLoading, setCastLoading] = useState(true);
     const isLoading = !detailLoading?(!castLoading?false:true):true;
-    const MAX_CAST_NUM = 10;
+    const MAX_CAST_NUM = CAST_MAX_NUM;
 
     const getAPIMovieDetail =async()=>{
        await fetch(`https://api.themoviedb.org/3/movie/${movie.id}${API_KEY}`)
@@ -107,7 +108,7 @@ function MovieDetail ({match}) {
                     
                     <div className="Movie__info">
                         <div className="Movie__title">
-                        <h1>{movieDetail.original_title}</h1>
+                            <h1>{movieDetail.original_title}</h1>
                         </div>
                         <div className="Movie__Rating">
                             <img 
@@ -129,8 +130,10 @@ function MovieDetail ({match}) {
                             ))}
                         </div>
                         <div className="Movie__overview">
-                       
                             {movieDetail.overview}
+                        </div>
+                        <div className="Movie__suggestion">
+                            <MovieSuggestion movieId={movieDetail.id}/>
                         </div>
                     </div>
 

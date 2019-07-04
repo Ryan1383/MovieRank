@@ -3,10 +3,10 @@ h1,h2 {
     margin-top:0;
 }
 
-
-
 .Movie__detail {
     padding:30px;
+    height: 485px;
+    position: relative;
 }
 .Movie__detail_container {
     display: flex;
@@ -14,7 +14,9 @@ h1,h2 {
 
 .Movie__info {
     width: 70%;
-    padding: 0px 20px 20px 20px ;
+   
+    padding:0px 20px;
+
 }
 
 .Movie__rating {
@@ -35,7 +37,6 @@ h1,h2 {
 }
 
 .Movie__overview {
-   
 }
 
 .Movie__cast {
@@ -50,9 +51,10 @@ h1,h2 {
     align-items: center;
 }
 
-
-
-
+.Movie__suggestion {
+   position: absolute;
+   bottom:0;
+}
 
 @media screen and (min-width:320px) and (max-width:667px){
     .Movie__detail_container{
@@ -71,6 +73,11 @@ h1,h2 {
         width: 100%;
         padding:20px 0px;
     }
+
+    .Movie__suggestion {
+        position: static;
+        margin-top: 15px;
+     }
 
    
 }

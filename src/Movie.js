@@ -1,6 +1,6 @@
 import React, {Component}from 'react';
 import {Link} from 'react-router-dom';
-import { URL_IMG, IMG_SIZE_LARGE } from './const';
+import { URL_IMG, IMG_SIZE_LARGE,API_KEY } from './const';
 import Star from './images/star.png'
 import './css/Movie.css';
 import './css/App.css'
@@ -26,7 +26,7 @@ class Movie extends Component {
     }
 
     getAPIMovies =()=>{
-        fetch('https://api.themoviedb.org/3/discover/movie?api_key=4d4ed145d3584846f5922b6a467e1f85&page=1')
+        fetch(`https://api.themoviedb.org/3/discover/movie${API_KEY}&page=1`)
         .then(res => res.json()
         .then(res =>{
           console.log('resgo>>>>>',res);
