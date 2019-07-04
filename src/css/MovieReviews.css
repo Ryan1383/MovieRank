@@ -1,0 +1,17 @@
+.Reviwes__content {
+
+}
+
+.review_container{
+    border-bottom: 1px solid lightblue;
+    margin: 5px 0px;
+    padding: 10px;
+}
+
+.review__author h4{
+    margin: 10px 0px;
+}
+
+.review__content {
+    padding:0px 10px;
+}

@@ -20,7 +20,7 @@ export default class MovieCastProfile extends Component{
           .then(res => res.json())
           .then(res =>{
 
-              if(res.profile_path != undefined){
+              if(res.profile_path !== undefined){
                 this.setState({
                     profile_path:res.profile_path
                   })
@@ -39,9 +39,10 @@ export default class MovieCastProfile extends Component{
     
     render(){
         return(
+            
             <img  
                 style={{width:30,height:30,borderRadius:50,resize:'contain'}} 
-                src ={this.state.profile_path != ''?
+                src ={this.state.profile_path !== ''?
                          URL_IMG+IMG_SIZE_LARGE+this.state.profile_path
                       :
                          Avatar
@@ -52,9 +53,4 @@ export default class MovieCastProfile extends Component{
     }
 }
 
-const imgStyle={
-    width:33,
-    height:33,
-    borderRadius:50,
-}
 

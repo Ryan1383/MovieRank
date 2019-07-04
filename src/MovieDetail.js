@@ -6,6 +6,7 @@ import Loading from './Loading';
 import Star from './images/star.png'
 import MovieCastProfile from './MovieCastProfile';
 import MovieTrailer from './MovieTrailer';
+import MovieReviews from './MovieRevies';
 
 
 function MovieDetail ({match}) {
@@ -30,7 +31,7 @@ function MovieDetail ({match}) {
     const MAX_CAST_NUM = 10;
 
     const getAPIMovieDetail =async()=>{
-       await fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=4d4ed145d3584846f5922b6a467e1f85`)
+       await fetch(`https://api.themoviedb.org/3/movie/${movie.id}${API_KEY}`)
         .then(res => res.json())
         .then(res =>{
             console.log('getAPIMovieDetail >>>>',res);       
@@ -48,14 +49,13 @@ function MovieDetail ({match}) {
       }
 
       //리뷰
-    //   https://api.themoviedb.org/3/movie/{movie_id}/reviews?api_key=<<api_key>>&language=en-US&page=1
+    //  
     const getAPIMovieCast =async(id)=>{
-      await  fetch(`https://api.themoviedb.org/3/movie/${movie.id}/casts?api_key=4d4ed145d3584846f5922b6a467e1f85`)
+      await  fetch(`https://api.themoviedb.org/3/movie/${movie.id}/casts${API_KEY}`)
         .then(res => res.json())
         .then(res =>{
             console.log('getAPIMovieCast >>>>',res);       
             if(res.cast != null){
-                console.log((res.cast).length);
                 if((res.cast).length >MAX_CAST_NUM){
                     setMovieCast(res.cast.splice(0,MAX_CAST_NUM));
                 }else{
@@ -73,7 +73,7 @@ function MovieDetail ({match}) {
     }  
 
     const getAPIMoviRevies =async()=>{
-        await  fetch(`https://api.themoviedb.org/3/movie/${movie.id}/reviews?api_key=4d4ed145d3584846f5922b6a467e1f85&language=en-US&page=1`)
+        await  fetch(`https://api.themoviedb.org/3/movie/${movie.id}/reviews${API_KEY}&language=en-US&page=1`)
           .then(res => res.json())
           .then(res =>{
               console.log('getAPIMoviRevies >>>>',res.results);       
@@ -116,7 +116,7 @@ function MovieDetail ({match}) {
                                 alt={'Rating star'}
                             />
                             <span>{movieDetail.vote_average}</span>
-                            {movieDetail.runtime != undefined&&
+                            {movieDetail.runtime !== undefined&&
                                 <span className="Movie__runtime">
                                     {`${movieDetail.runtime}분`}
                                 </span>
@@ -129,17 +129,17 @@ function MovieDetail ({match}) {
                             ))}
                         </div>
                         <div className="Movie__overview">
+                       
                             {movieDetail.overview}
                         </div>
                     </div>
+
                     <div className="Movie__cast">
-                        <div>
-                            <h3>Cast</h3>
-                        </div>
+                        <h2>Cast</h2>
                         {movieCast.map(cast =>(
-                            <div key={cast.id} style={{marginTop:10,marginBottom:10}}>
+                            <div className="Cast__profile" key={cast.id}>
                                 <MovieCastProfile personId ={cast.id} />
-                                <span style={{fontSize:12}}>{cast.name} as {cast.character}</span>
+                                <span style={{fontSize:12,paddingLeft:5}}><span style={{color:'blue'}}>{cast.name}</span> as {cast.character}</span>
                             </div>
                         ))}
                     
@@ -147,7 +147,11 @@ function MovieDetail ({match}) {
                 </div>
                 <div className="Movie__trailer">
                     <h2>Movie Trailer</h2>
+                    <hr/>
                     <MovieTrailer movieId={movie.id}/>
+                </div>
+                <div className="Movie__Reviews">
+                     <MovieReviews movieId={movie.id}/>       
                 </div>
             </>
         }
