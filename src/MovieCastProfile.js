@@ -20,13 +20,13 @@ export default class MovieCastProfile extends Component{
           .then(res => res.json())
           .then(res =>{
 
-              if(res.profile_path !== undefined){
+              if(res.profile_path !== null){
                 this.setState({
                     profile_path:res.profile_path
                   })
               }else{
                 this.setState({
-                    profile_path:Avatar
+                    profile_path:''
                   })
               }
               

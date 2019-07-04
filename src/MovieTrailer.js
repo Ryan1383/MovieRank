@@ -1,7 +1,7 @@
 import React ,{Component} from 'react';
 import Iframe from 'react-iframe'
 
-import { URL_YOUTUBE } from './const';
+import { URL_YOUTUBE,API_KEY } from './const';
 import './css/MovieTrailer.css';
 
 export default class MovieTrailer extends Component {
@@ -19,7 +19,7 @@ export default class MovieTrailer extends Component {
     }
 
     getAPIMovieTrailer =async(movieId)=>{
-        const trailerUrl = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=4d4ed145d3584846f5922b6a467e1f85`
+        const trailerUrl = `https://api.themoviedb.org/3/movie/${movieId}/videos${API_KEY}`
        
         await fetch(trailerUrl)
           .then(res => res.json())
@@ -61,9 +61,8 @@ export default class MovieTrailer extends Component {
   function Trailer({trailer}) {
     return(
         <Iframe url={URL_YOUTUBE + trailer}
-            width="350px"
-            height="250px"
-            className="trailer__Iframe"
+          
+            className="Trailer__Iframe"
         />
     )
   }
