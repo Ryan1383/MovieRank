@@ -1,4 +1,4 @@
-import React,{useState,useEffect, use} from 'react';
+import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { URL_IMG, IMG_SIZE_LARGE,API_KEY,CAST_MAX_NUM } from './const';
 import './css/MovieDetail.css';
