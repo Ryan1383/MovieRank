@@ -20,6 +20,10 @@ export default class MovieReviews extends Component {
         this.getAPIMovieReviwes(this.props.movieId);
     }
 
+    componentWillReceiveProps(){
+        this.getAPIMovieReviwes(this.props.movieId)
+ 
+     }
     getAPIMovieReviwes =async(movieId)=>{
        
         const reviwes = `https://api.themoviedb.org/3/movie/${movieId}/reviews${API_KEY}&language=en-US&page=1`

@@ -6,7 +6,7 @@ import Loading from './Loading';
 import Star from './images/star.png'
 import MovieCastProfile from './MovieCastProfile';
 import MovieTrailer from './MovieTrailer';
-import MovieReviews from './MovieRevies';
+import MovieReviews from './MovieReviews';
 import MovieSuggestion from './MovieSuggestion';
 
 
@@ -16,15 +16,12 @@ function MovieDetail ({match}) {
         console.log('match>>>',match)
         getAPIMovieDetail();
         getAPIMovieCast();
-        getAPIMoviRevies();
-
-    }, {});
+    }, [match]);
 
     const movie = match.params;
     
     const [movieDetail, setMovieDetail] = useState({});
     const [movieCast, setMovieCast] = useState({});
-    const [movieReview, setMovieReview] = useState({});
 
     const [detailLoading, setDetailLoading] = useState(true);
     const [castLoading, setCastLoading] = useState(true);
@@ -49,8 +46,6 @@ function MovieDetail ({match}) {
         })
       }
 
-      //리뷰
-    //  
     const getAPIMovieCast =async(id)=>{
       await  fetch(`https://api.themoviedb.org/3/movie/${movie.id}/casts${API_KEY}`)
         .then(res => res.json())
@@ -73,27 +68,6 @@ function MovieDetail ({match}) {
         })
     }  
 
-    const getAPIMoviRevies =async()=>{
-        await  fetch(`https://api.themoviedb.org/3/movie/${movie.id}/reviews${API_KEY}&language=en-US&page=1`)
-          .then(res => res.json())
-          .then(res =>{
-              console.log('getAPIMoviRevies >>>>',res.results);       
-              setMovieReview(res.results.slice(0,4));
-          })
-          .catch(err =>{
-              console.log(err);
-          })
-      }  
-
-    const movie_container_style ={
-        background: '#f1f1f1'
-    }
-
-    // const onClickSuggestion =async(id)=>{
-    //     getAPIMovieDetail(id);
-    //     getAPIMovieSuggestion(id);
-
-    // }
     return(
         <div className="Movie__detail">
         {isLoading?
@@ -133,7 +107,7 @@ function MovieDetail ({match}) {
                             {movieDetail.overview}
                         </div>
                         <div className="Movie__suggestion">
-                            <MovieSuggestion movieId={movieDetail.id}/>
+                           <MovieSuggestion movieId={match.params.id}/>
                         </div>
                     </div>
 
@@ -151,10 +125,10 @@ function MovieDetail ({match}) {
                 <div className="Movie__trailer">
                     <h2>Movie Trailer</h2>
                     <hr/>
-                    <MovieTrailer movieId={movie.id}/>
+                    <MovieTrailer movieId={ match.params.id}/>
                 </div>
                 <div className="Movie__Reviews">
-                     <MovieReviews movieId={movie.id}/>       
+                     <MovieReviews movieId={ match.params.id}/>       
                 </div>
             </>
         }
