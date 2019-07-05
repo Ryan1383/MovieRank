@@ -19,6 +19,11 @@ export default class MovieSuggestion extends Component {
         this.getAPIMovieSuggestion(this.props.movieId);
     }
 
+    componentWillReceiveProps(){
+       this.getAPIMovieSuggestion(this.props.movieId)
+
+    }
+
     getAPIMovieSuggestion =async(movieId)=>{
        
         const suggestion = `https://api.themoviedb.org/3/movie/${movieId}/similar${API_KEY}&language=en-US&page=1`
@@ -42,7 +47,7 @@ export default class MovieSuggestion extends Component {
         let render = this.state.suggestion.map( Suggestion =>
             (
                 <div key={Suggestion.id} className="Suggestion_container">
-                    <Link to={`/${Suggestion.id}`}>
+                    <Link to={`/${Suggestion.id}`} >
                         <img
                             className="Suggestion__poster Poster__Scale"
                             src ={URL_IMG+IMG_SIZE_LARGE+Suggestion.poster_path} 

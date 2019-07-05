@@ -18,6 +18,10 @@ export default class MovieTrailer extends Component {
         this.getAPIMovieTrailer(this.props.movieId);
     }
 
+    componentWillReceiveProps(){
+        this.getAPIMovieTrailer(this.props.movieId)
+ 
+    }
     getAPIMovieTrailer =async(movieId)=>{
         const trailerUrl = `https://api.themoviedb.org/3/movie/${movieId}/videos${API_KEY}`
        
