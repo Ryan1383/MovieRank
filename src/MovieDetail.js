@@ -16,14 +16,12 @@ function MovieDetail ({match}) {
         console.log('match>>>',match)
         getAPIMovieDetail();
         getAPIMovieCast();
-        renderSuggestion();
     }, [match]);
 
     const movie = match.params;
     
     const [movieDetail, setMovieDetail] = useState({});
     const [movieCast, setMovieCast] = useState({});
-    const [movieReview, setMovieReview] = useState({});
 
     const [detailLoading, setDetailLoading] = useState(true);
     const [castLoading, setCastLoading] = useState(true);
@@ -70,11 +68,6 @@ function MovieDetail ({match}) {
         })
     }  
 
-   
-    const renderSuggestion =() =>{
-        return <MovieSuggestion movieId={match.params.id}/>
-    }
-  
     return(
         <div className="Movie__detail">
         {isLoading?
@@ -114,7 +107,7 @@ function MovieDetail ({match}) {
                             {movieDetail.overview}
                         </div>
                         <div className="Movie__suggestion">
-                           {renderSuggestion()}
+                           <MovieSuggestion movieId={match.params.id}/>
                         </div>
                     </div>
 
