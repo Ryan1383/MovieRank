@@ -3,20 +3,18 @@ h1,h2 {
     margin-top:0;
 }
 
-.Movie__detail {
+.Cast__detail {
     padding:30px;
     height: 485px;
     position: relative;
 }
-.Movie__detail_container {
+.Cast__detail_container {
     display: flex;
 }
 
-.Movie__info {
+.Cast__info {
     width: 70%;
-   
     padding:0px 20px;
-
 }
 
 .Movie__rating {
@@ -40,41 +38,28 @@ h1,h2 {
     color:rgba(112, 102, 102, 0.849);
 }
 
-.Movie__cast {
+.Cast__movies {
     width:30%;
 } 
 
-.Cast__profile {
-    margin: 10px 0px;
-}
-
-.Movie__suggestion {
-   position: absolute;
-   bottom:0;
-}
 
 @media screen and (min-width:320px) and (max-width:667px){
-    .Movie__detail_container{
+    .Cast__detail_container{
         display: block;        
     }
-    .Movie__poster {
+    .Cast__poster {
         display: flex;
         justify-content: center;
         align-items: center;
         margin: auto;
     }
-    .Movie__cast {
+    .Cast__movies {
         width:100%;
     } 
-    .Movie__info {
+    .Cast__info {
         width: 100%;
         padding:20px 0px;
     }
-
-    .Movie__suggestion {
-        position: static;
-        margin-top: 15px;
-     }
 
    
 }

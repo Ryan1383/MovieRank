@@ -5,6 +5,7 @@ import './css/App.css';
 import Movie from './Movie';
 import Header from './Header';
 import MovieDetail from './MovieDetail';
+import MovieCast from './MovieCast';
 
 class App extends Component {
 
@@ -15,9 +16,9 @@ class App extends Component {
           <Header/>
           <Switch>
             <Route path="/" exact component={Movie} />
-            <Route path="/:id" component={MovieDetail} />
+            <Route path="/detail/:id" component={MovieDetail} />
+            <Route path="/cast/:id" component={MovieCast} />
           </Switch>
-
         </Router>
       </>
 

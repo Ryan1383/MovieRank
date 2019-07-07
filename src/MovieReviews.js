@@ -46,8 +46,8 @@ export default class MovieReviews extends Component {
           .catch(err =>{
               console.log(err);
           })
-      }  
-      handleMore = (index) => {
+    }  
+    handleMore = (index) => {
         const moreArray = this.state.more;
         if(moreArray[index] == false){
             moreArray[index] = true;
