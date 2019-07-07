@@ -47,7 +47,7 @@ export default class MovieSuggestion extends Component {
         let render = this.state.suggestion.map( Suggestion =>
             (
                 <div key={Suggestion.id} className="Suggestion_container">
-                    <Link to={`/${Suggestion.id}`} >
+                    <Link to={`/detail/${Suggestion.id}`} >
                         <img
                             className="Suggestion__poster Poster__Scale"
                             src ={URL_IMG+IMG_SIZE_LARGE+Suggestion.poster_path} 

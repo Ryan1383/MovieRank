@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import LinesEllipsis from 'react-lines-ellipsis'
+
 import { URL_IMG, IMG_SIZE_LARGE,API_KEY,CAST_MAX_NUM } from './const';
 import './css/MovieDetail.css';
 import Loading from './Loading';
@@ -104,7 +106,13 @@ function MovieDetail ({match}) {
                             ))}
                         </div>
                         <div className="Movie__overview">
-                            {movieDetail.overview}
+                        <LinesEllipsis
+                            text={movieDetail.overview}
+                            maxLine='8'
+                            trimRight
+                            basedOn='letters'
+                        />   
+                            
                         </div>
                         <div className="Movie__suggestion">
                            <MovieSuggestion movieId={match.params.id}/>
@@ -115,8 +123,11 @@ function MovieDetail ({match}) {
                         <h2>Cast</h2>
                         {movieCast.map(cast =>(
                             <div className="Cast__profile" key={cast.id}>
-                                <MovieCastProfile personId ={cast.id} />
-                                <span style={{fontSize:12,paddingLeft:5}}><span style={{color:'blue'}}>{cast.name}</span> as {cast.character}</span>
+                                <MovieCastProfile 
+                                    personId ={cast.id}  
+                                    name ={cast.name}
+                                    character= {cast.character}
+                                />
                             </div>
                         ))}
                     

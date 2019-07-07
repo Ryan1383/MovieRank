@@ -1,106 +1,81 @@
-// https://api.themoviedb.org/3/discover/movie?api_key=4d4ed145d3584846f5922b6a467e1f85&with_cast=973667
 import React,{useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { URL_IMG, IMG_SIZE_LARGE,API_KEY } from './const';
-import './css/MovieDetail.css';
 import Loading from './Loading';
+import LinesEllipsis from 'react-lines-ellipsis'
+import './css/CastDetail.css';
 
-function MovieCast ({match}) {
+function MovieCast ({match,location}) {
 
     useEffect(() => {
+        console.log('cast>>>>>>', match);
+        console.log('cast props>>>>>>', location.state.cast);
 
+        setCast(location.state.cast);
+        getAPICastMovieList(match.params.id);
     }, {});
 
-   
+    const [cast, setCast] = useState({});
+    const [castMovies, setCastMovies] = useState({});
 
-    const getAPIMovieDetail =async()=>{
-       await fetch(`https://api.themoviedb.org/3/movie/${movie.id}${API_KEY}`)
-        .then(res => res.json())
-        .then(res =>{
-            console.log('getAPIMovieDetail >>>>',res);       
-            if(res != null){
-                setMovieDetail(res);
-                setDetailLoading(false);
-                setSuggestionLoading(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-            }else{
-                console.log('has no data');
-            }
-        })
-        .catch(err =>{
-          console.log(err);
-        })
-      }
-   
+    const getAPICastMovieList =async(personId)=>{
+       
+        await fetch(` https://api.themoviedb.org/3/person/${personId}/movie_credits${API_KEY}`)
+          .then(res => res.json())
+          .then(res =>{
+            console.log('getAPICastMovieList>>>', res);
+                setCastMovies(res);
+                setIsLoading(false);
+          })
+          .catch(err =>{
+              console.log(err);
+          })
+      }  
 
-    const movie_container_style ={
-        background: '#f1f1f1'
-    }
+      const noData = "don't have infomation.."
 
-    // const onClickSuggestion =async(id)=>{
-    //     getAPIMovieDetail(id);
-    //     getAPIMovieSuggestion(id);
-
-    // }
-    console.log('movieDetail>>',movieDetail)
     return(
-        /**
-         * UI 구성 요소
-         *  1.  title - title_long  O
-         *  2.  thumbnail image - medium_cover_image O
-         *  3.  description - description_full
-         *  4.  cast - cast {character_name, name, url_small_image}
-         *  5.  genres - genres O
-         *  6.  screen_shot images - (medium_screenshot_image1, medium_screenshot_image2, medium_screenshot_image3)
-         *  7.  rating - rating O
-         *  8.  runtime(minute) - runtime O
-         *  9.  year - year
-         *  10. trailercode 
-         *  11. background_image - background_image
-         * 
-         *  12. suggestion 
-         */
         
         <>
         {isLoading?
         
           <Loading />
         :
-            <div className="Movie__detail" style={movie_container_style}>
-                <div className="Movie__poster">
-                    <img src={URL_IMG+IMG_SIZE_LARGE+movieDetail.poster_path} alt={movieDetail.title} title={movieDetail.title}/>
-                </div>
-                 {/*
-                <div className="Movie__info">
-                    <div className="Movie__title">
-                       <h1>{movieDetail.original_title}</h1>
-                    </div>
-                    <div className="Movie__rating">
-                        {movieDetail.vote_average}
-                    </div>
-                     <div className="Movie__year">
-                        {movieDetail.year}
-                    </div> 
-                    <div className="Movie__runtime">
-                        {movieDetail.runtime}
-                    </div>
-                    <div className="Movie__genres">
-                        {movieDetail.genres}
-                    </div>
-                </div> */}
-                {/* <div className="Movie__suggestion">
-                    <div className="Suggestion__title">
-                        <h3>Movie Suggestion</h3>
-                    </div>
-                    <div className="Suggestion_list">
-                        {movieSuggestions.map(movie =>(
-                            <div onClick={()=>onClickSuggestion(movie.id)}>
-                                <img src={movie.small_cover_image} alt={movie.title} title={movie.title} />
-                            </div>
-                        ))}
-                    </div>
-                </div> */}
+        <div className="Cast__detail">
+        <div className="Cast__detail_container" >
+            <div className="Cast__poster">
+                <img src={URL_IMG+IMG_SIZE_LARGE+cast.profile_path} alt={cast.name} title={cast.name}/>
             </div>
+            
+            <div className="Cast__info">
+                <div className="Cast__title">
+                    <h1>{cast.name}</h1>
+                </div>
+                <div>
+                    <p>Birthday{ cast.deathday!=null&& "-Deathday"}: {cast.birthday == null?noData: cast.deathday != null? cast.birthday +' ~ '+ cast.deathday : cast.birthday}</p>
+                    <p>Known for: {cast.known_for_department}</p>
+                    <p>Place of birth: {cast.place_of_birth}</p>
+                </div>
+            
+                <div className="Cast__overview">
+                    <LinesEllipsis
+                        text={cast.biography}
+                        maxLine='12'
+                        trimRight
+                        basedOn='letters'
+                    />   
+                </div>
+            </div>
+            <div className="Cast__movies">
+                <h2>Movies</h2>
+               
+            </div>
+        </div>
+      
+    </div>
+}
         }
         </>
     )
@@ -110,5 +85,5 @@ function MovieCast ({match}) {
 
 
 
-export default MovieDetail;
+export default MovieCast;
 

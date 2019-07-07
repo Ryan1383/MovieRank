@@ -49,7 +49,7 @@ class Movie extends Component {
             this.state.movies.map(movie=>(
             <div key = {movie.id} className="Movie">
                 <div className="Movie__Column">
-                    <Link to={`/${movie.id}`}>
+                    <Link to={`/detail/${movie.id}`}>
                         <MoviePoster 
                             posterImg = {URL_IMG+IMG_SIZE_LARGE+movie.poster_path}
                             alt={movie.title}

@@ -67,6 +67,7 @@ export default class MovieTrailer extends Component {
         <Iframe url={URL_YOUTUBE + trailer}
           
             className="Trailer__Iframe"
+            allowFullScreen
         />
     )
   }
