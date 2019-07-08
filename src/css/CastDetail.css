@@ -17,23 +17,6 @@ h1,h2 {
     padding:0px 20px;
 }
 
-.Movie__rating {
-
-}
-
-
-.Movie__runtime {
-    
-}
-
-.Movie__genres {
-    margin: 10px 0px;
-}
-.Movie__genre {
-    margin:10px 10px;
-    margin-left: 0px;
-}
-
 .Movie__overview {
     color:rgba(112, 102, 102, 0.849);
 }

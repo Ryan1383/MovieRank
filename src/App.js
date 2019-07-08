@@ -11,7 +11,7 @@ class App extends Component {
 
   render(){
     return (
-      <>
+      <React.Fragment>
         <Router>
           <Header/>
           <Switch>
@@ -20,7 +20,7 @@ class App extends Component {
             <Route path="/cast/:id" component={MovieCast} />
           </Switch>
         </Router>
-      </>
+      </React.Fragment>
 
     );
   }

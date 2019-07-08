@@ -21,7 +21,6 @@ export default class MovieCastProfile extends Component{
         await fetch(` https://api.themoviedb.org/3/person/${personId}${API_KEY}`)
           .then(res => res.json())
           .then(res =>{
-            console.log('getAPIMovieCastProfile>>>', res);
               if(res.profile_path !== null){
                 this.setState({
                     cast:res,
@@ -34,10 +33,6 @@ export default class MovieCastProfile extends Component{
                     profile_path:''
                   })
               }
-              
-
-              
-             
           })
           .catch(err =>{
               console.log(err);

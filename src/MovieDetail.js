@@ -76,7 +76,7 @@ function MovieDetail ({match}) {
         
           <Loading />
         :
-            <>
+            <React.Fragment>
                 <div className="Movie__detail_container" >
                     <div className="Movie__poster">
                         <img src={URL_IMG+IMG_SIZE_LARGE+movieDetail.poster_path} alt={movieDetail.title} title={movieDetail.title}/>
@@ -115,7 +115,12 @@ function MovieDetail ({match}) {
                             
                         </div>
                         <div className="Movie__suggestion">
-                           <MovieSuggestion movieId={match.params.id}/>
+                        
+                           <MovieSuggestion 
+                                title={'Suggestion'}
+                                type={'movie'}
+                                url={`https://api.themoviedb.org/3/movie/${match.params.id}/similar${API_KEY}&language=en-US&page=1`} 
+                            />
                         </div>
                     </div>
 
@@ -141,7 +146,7 @@ function MovieDetail ({match}) {
                 <div className="Movie__Reviews">
                      <MovieReviews movieId={ match.params.id}/>       
                 </div>
-            </>
+            </React.Fragment>
         }
         </div>
     )
