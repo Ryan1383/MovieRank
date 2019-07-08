@@ -1,13 +1,31 @@
+.Cast__Movie__Container {
+    position: absolute;
+    top:0.5;
+    
+}
+
+.Suggestion__movie_container{
+
+}
+
+
 .Suggestion__content {    
     display:flex;
 }
 
 .Suggestion__poster {
     height: 160px;
-    padding-right: 30px
+    margin:10px;
 }
 
+.Suggestion__Movie_content {
+    display:flex;
+}
 
+.Suggestion__Cast_content {
+    display: flex;
+    flex-wrap: wrap;
+}
 .Poster__Scale {
     transform: scale(1);
     -webkit-transform: scale(1);
@@ -26,13 +44,20 @@
   }
 
   @media screen and (min-width:320px) and (max-width:667px){
-    .Suggestion__content {
+    .Suggestion__Movie_content,.Suggestion__Cast_content {
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
     }
     .Suggestion__poster {
         padding-bottom: 5px;
+        margin:23px;
+
     }
+
+    .Cast__Movie__Container{
+        position:static;
+    }
+
    
 }

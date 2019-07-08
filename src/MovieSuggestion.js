@@ -12,30 +12,46 @@ export default class MovieSuggestion extends Component {
             suggestion:[],
             isLoading:true,
             reRender:false,
+            isTypeMovie:true,
         }
     }
 
     componentDidMount(){
-        this.getAPIMovieSuggestion(this.props.movieId);
+        if(this.props.type == 'movie'){
+            this.setState({
+                isTypeMovie:true,
+            })
+        }else{
+            this.setState({
+                isTypeMovie:false,
+            })
+        }
+        this.getAPIMovieSuggestion(this.props.url);
     }
 
     componentWillReceiveProps(){
-       this.getAPIMovieSuggestion(this.props.movieId)
+       this.getAPIMovieSuggestion(this.props.url)
 
     }
 
-    getAPIMovieSuggestion =async(movieId)=>{
-       
-        const suggestion = `https://api.themoviedb.org/3/movie/${movieId}/similar${API_KEY}&language=en-US&page=1`
-       
+    getAPIMovieSuggestion =async(url)=>{
+        const suggestion =url;
         await fetch(suggestion)
           .then(res => res.json())
           .then(res =>{
             console.log('getAPIMovieSuggestion>>>', res);
-            this.setState({
-                suggestion:(res.results).splice(0,4),
-                isLoading:false,
-            })
+
+            if(this.state.isTypeMovie){
+                this.setState({
+                    suggestion:(res.results).splice(0,4),
+                    isLoading:false,
+                })
+            }else{
+                this.setState({
+                    suggestion:(res.cast).splice(0,4),
+                    isLoading:false,
+                })
+            }   
            
           })
           .catch(err =>{
@@ -64,9 +80,9 @@ export default class MovieSuggestion extends Component {
       
     render(){
         return(
-            <div className="Movie__suggestion">
-                <h2>Suggestion</h2>
-                <div className="Suggestion__content">
+            <div className={!this.state.isTypeMovie?"Cast__Movie__Container":"Suggestion__movie_container"}>
+                <h2>{this.props.title}</h2>
+                <div className={this.state.isTypeMovie?"Suggestion__Movie_content":"Suggestion__Cast_content"}>
                         {this.renderSuggestion()}
                 </div>
             </div>
