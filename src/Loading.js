@@ -9,7 +9,6 @@ function Loading () {
 
     useEffect(()=>{
         makeLoadingIncicator();
-
         return()=>{
             clearInterval(repeat);
         }

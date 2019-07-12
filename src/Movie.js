@@ -14,6 +14,8 @@ class Movie extends Component {
         this.state ={
           movies : [],
           isLoading: true,
+          url:'',
+          sortType:'Popularity',
     
         }
     }
@@ -21,21 +23,43 @@ class Movie extends Component {
     componentDidMount(){
         // 상세화면으로 이동 후에 다시 목록 페이지로 돌아갈경우 loading창이 뜨게 되는데 이때 상태관리(redux)의 필요성을 느낌
         // 상세화면 이동 -> 뒤로가기 -> 기존에 받아온 데이터를 저장한 객체를 기반으로 렌더를 함으로서 성능 향상을 야기
-        this.getAPIMovies();
-        
+        this.handleMovieUrl('Popularity');
     }
 
-    getAPIMovies =()=>{
-        fetch(`https://api.themoviedb.org/3/discover/movie${API_KEY}&page=1`)
+    
+    handleMovieUrl = (sortType) =>{
+        let url = '';
+        this.setState({
+            sortType:sortType
+        })
+        console.log(sortType);
+        if(sortType === 'Popularity'){
+                url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=1`
+        }else if(sortType === 'Ranking'){
+                url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=1&sort_by=vote_average.desc`
+        }else if(sortType === 'VoteCount'){
+                url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=1&sort_by=vote_count.desc`
+        }else{
+            url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=1`
+        }
+
+        this.getAPIMovies(url);
+        
+    }
+    getAPIMovies =async(url)=>{
+        console.log('getAPIMovies url>>>> ',url);
+        this.setState({
+            isLoading:true,
+        })
+        await fetch(url)
         .then(res => res.json()
         .then(res =>{
           console.log('resgo>>>>>',res);
-          let movies = res.results;
     
             this.setState({
-              movies : movies,
+              movies : res.results,
               isLoading: false,
-            },()=>console.log(this.state.movies));
+            });
           
         }
         )
@@ -78,15 +102,6 @@ class Movie extends Component {
                             )
                         )}
                     </div>
-                    {/* <div className="Movie__Synopsis">
-                        <LinesEllipsis
-                            text={movie.synopsis}
-                            maxLine='3'
-                            ellipsis='...'
-                            trimRight
-                            basedOn='letters'
-                            />   
-                    </div> */}
                 </div>
             </div>
             
@@ -97,11 +112,36 @@ class Movie extends Component {
     render () {
         return(
             <div className={!this.state.isLoading?"App":"App--loading"}>
-            {this.state.isLoading?
-                <Loading />
-            : 
-                this._renderItems()
-            }
+                        
+                {this.state.isLoading?
+                    <Loading />
+                : 
+                    <React.Fragment>
+                    <div className="Sort__Container">
+                        <ul className="sort_list">
+                            <li>|</li>
+                            <li className={ this.state.sortType ==='Popularity'?"Poster__Scale Sort__clicked":'Poster__Scale'}
+                                onClick={()=>this.handleMovieUrl('Popularity')}>
+                                    Popularity 
+                            </li>
+                            <li>|</li>
+                            <li className={ this.state.sortType ==='Ranking'?"Poster__Scale Sort__clicked":'Poster__Scale'}
+                                 onClick={()=>this.handleMovieUrl('Ranking')}>
+                                    Ranking 
+                            </li>
+                            <li>|</li>
+                            <li className={ this.state.sortType ==='VoteCount'?"Poster__Scale Sort__clicked":'Poster__Scale'}
+                                onClick={()=>this.handleMovieUrl('VoteCount')}>
+                                    Vote Count
+                            </li>
+                            <li>|</li>
+
+                        </ul>    
+                    </div>   
+                    {this._renderItems()}
+                    </React.Fragment>
+
+                }
             </div>
         );
     }

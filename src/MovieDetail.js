@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react';
-import {Link} from 'react-router-dom';
 import LinesEllipsis from 'react-lines-ellipsis'
 
 import { URL_IMG, IMG_SIZE_LARGE,API_KEY,CAST_MAX_NUM } from './const';

@@ -23,7 +23,7 @@ export default class MovieReviews extends Component {
     componentWillReceiveProps(){
         this.getAPIMovieReviwes(this.props.movieId)
  
-     }
+    }
     getAPIMovieReviwes =async(movieId)=>{
        
         const reviwes = `https://api.themoviedb.org/3/movie/${movieId}/reviews${API_KEY}&language=en-US&page=1`
@@ -49,7 +49,7 @@ export default class MovieReviews extends Component {
     }  
     handleMore = (index) => {
         const moreArray = this.state.more;
-        if(moreArray[index] == false){
+        if(moreArray[index] === false){
             moreArray[index] = true;
         }else{
             moreArray[index] = false;
@@ -79,7 +79,7 @@ export default class MovieReviews extends Component {
                         :
                       review.content
                       }
-                      <p onClick={()=>this.handleMore(index)} style={{color:'blue'}}>{this.state.more[index]==true?'more':'less'}</p>
+                      <p onClick={()=>this.handleMore(index)} style={{color:'blue'}}>{this.state.more[index]===true?'more':'less'}</p>
                 </div>
               </div>
             )

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import './css/Header.css';
 
 class Header extends Component {
@@ -7,7 +8,18 @@ class Header extends Component {
 
         return(
             <div className="Header-Container">
-                <span>헤더</span>
+                  <Link  to={{
+                            pathname :`/`,
+                            state:{
+                                type:''
+                            }
+                            }}
+                            className="Link_style"
+                        >
+                    <h1>MovieRank</h1>
+                </Link>
+
+               
             </div>
         )
     }
