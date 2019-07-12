@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import {Link} from 'react-router-dom';
-import { URL_IMG, IMG_SIZE_LARGE,API_KEY } from './const';
+import { URL_IMG, IMG_SIZE_LARGE } from './const';
 import './css/MovieSuggestion.css';
 
 export default class MovieSuggestion extends Component {
@@ -17,7 +17,7 @@ export default class MovieSuggestion extends Component {
     }
 
     componentDidMount(){
-        if(this.props.type == 'movie'){
+        if(this.props.type === 'movie'){
             this.setState({
                 isTypeMovie:true,
             })

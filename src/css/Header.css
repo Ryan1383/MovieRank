@@ -1,4 +1,12 @@
+h1{
+    margin:0;
+    padding:0;
+}
 .Header-Container {
     height: 100px;
     background : #2e6a80;
+    display: flex;
+    align-items: center;
+    padding: 0px 20px 0px 20px;
 }
+
