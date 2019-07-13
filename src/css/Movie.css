@@ -34,6 +34,7 @@
 
 .Sort__clicked {
     color:#2e6a80;
+    font-weight: bold;
 }
 
 .Movie__Column{
@@ -105,6 +106,22 @@
     -o-transform: scale(1.1);
     cursor: pointer;
   }
+
+
+  .Movie__page__buttons {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: space-between;
+      color: #2e6a80;
+      font-size: 22px;
+      margin: 0px 30px;
+  }
+
+  .Movie__page__button:hover {
+    cursor: pointer;
+  }
+
 @media screen and (min-width:320px) and (max-width:667px){
     .Movie{
         width:100%;
@@ -127,5 +144,9 @@
     .sort_list {
         justify-content: center;
         padding:0;
+    }
+
+    .Movie__page__buttons {
+        margin:0;
     }
 }
