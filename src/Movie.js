@@ -6,6 +6,8 @@ import './css/Movie.css';
 import './css/App.css'
 import Loading from './Loading';
 
+
+let pageNumber = 1;
 class Movie extends Component {
 
     constructor(props){
@@ -16,7 +18,7 @@ class Movie extends Component {
           isLoading: true,
           url:'',
           sortType:'Popularity',
-    
+          pageNumber: 1,
         }
     }
 
@@ -29,20 +31,28 @@ class Movie extends Component {
     
     handleMovieUrl = (sortType) =>{
         let url = '';
+
+        if(sortType !== this.state.sortType){
+            pageNumber = 1;
+        }
+
         this.setState({
-            sortType:sortType
+            sortType:sortType,
         })
         console.log(sortType);
         if(sortType === 'Popularity'){
-                url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=1`
+                url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=${pageNumber}`
         }else if(sortType === 'Ranking'){
-                url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=1&sort_by=vote_average.desc`
+                url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=${pageNumber}&sort_by=vote_average.desc`
         }else if(sortType === 'VoteCount'){
-                url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=1&sort_by=vote_count.desc`
+                url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=${pageNumber}&sort_by=vote_count.desc`
         }else{
-            url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=1`
+            url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=${pageNumber}`
         }
 
+        this.setState({
+            url: url
+        })
         this.getAPIMovies(url);
         
     }
@@ -68,7 +78,19 @@ class Movie extends Component {
         })
         )}
 
-      _renderItems =()=>{
+    handlePageNumber =(type) =>{
+        if(type ==='pre'){
+           pageNumber = pageNumber-1;
+        }else if(type ==='next'){
+           pageNumber = pageNumber+1;
+        }else {
+            console.log('type not matched')
+        }
+
+        this.handleMovieUrl(this.state.sortType);
+    } 
+
+    _renderItems =()=>{
         return(
             this.state.movies.map(movie=>(
             <div key = {movie.id} className="Movie">
@@ -106,8 +128,21 @@ class Movie extends Component {
             </div>
             
         )))
-        
-      }
+    
+    }
+
+    _renderPagenation =() =>{
+        return(
+                <div className="Movie__page__buttons">
+                    <div className="Movie__page__button" onClick={()=>this.handlePageNumber('pre')}>
+                        <span>← Previous</span>
+                    </div>
+                    <div className="Movie__page__button" onClick = {()=>this.handlePageNumber('next')}>
+                        <span>Next → </span>
+                    </div>
+                </div>
+        )
+    }
 
     render () {
         return(
@@ -129,6 +164,7 @@ class Movie extends Component {
                                  onClick={()=>this.handleMovieUrl('Ranking')}>
                                     Ranking 
                             </li>
+
                             <li>|</li>
                             <li className={ this.state.sortType ==='VoteCount'?"Poster__Scale Sort__clicked":'Poster__Scale'}
                                 onClick={()=>this.handleMovieUrl('VoteCount')}>
@@ -139,6 +175,7 @@ class Movie extends Component {
                         </ul>    
                     </div>   
                     {this._renderItems()}
+                    {this._renderPagenation()}
                     </React.Fragment>
 
                 }
