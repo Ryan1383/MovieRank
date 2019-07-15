@@ -1,10 +1,12 @@
 import React, {Component}from 'react';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import { URL_IMG, IMG_SIZE_LARGE,API_KEY } from './const';
 import Star from './images/star.png'
 import './css/Movie.css';
 import './css/App.css'
 import Loading from './Loading';
+import SearchBar from './SearchBar';
+
 
 
 let pageNumber = 1;
@@ -18,14 +20,33 @@ class Movie extends Component {
           isLoading: true,
           url:'',
           sortType:'Popularity',
-          pageNumber: 1,
+          pageNumber: pageNumber,
+          isSearch:false,
         }
     }
 
     componentDidMount(){
         // 상세화면으로 이동 후에 다시 목록 페이지로 돌아갈경우 loading창이 뜨게 되는데 이때 상태관리(redux)의 필요성을 느낌
         // 상세화면 이동 -> 뒤로가기 -> 기존에 받아온 데이터를 저장한 객체를 기반으로 렌더를 함으로서 성능 향상을 야기
-        this.handleMovieUrl('Popularity');
+        if(this.props.searchData === undefined){
+            this.handleMovieUrl('Popularity');
+            this.setState({
+                isSearch:false,
+            })
+        }else{
+            this.setState({
+                movies: this.props.searchData,
+                isLoading:false,
+                isSearch:true,
+            })
+        }
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log( 'movie.js received >>',nextProps);
+        this.setState({
+            movies: nextProps.searchData,
+        })
     }
 
     
@@ -76,7 +97,8 @@ class Movie extends Component {
         .catch(err =>{
           console.log(err);
         })
-        )}
+        )
+    }
 
     handlePageNumber =(type) =>{
         if(type ==='pre'){
@@ -89,6 +111,8 @@ class Movie extends Component {
 
         this.handleMovieUrl(this.state.sortType);
     } 
+
+    
 
     _renderItems =()=>{
         return(
@@ -135,7 +159,7 @@ class Movie extends Component {
         return(
                 <div className="Movie__page__buttons">
                     <div className="Movie__page__button" onClick={()=>this.handlePageNumber('pre')}>
-                        <span>← Previous</span>
+                        <span>{pageNumber !==1? '←Previous' : ' '} </span>
                     </div>
                     <div className="Movie__page__button" onClick = {()=>this.handlePageNumber('next')}>
                         <span>Next → </span>
@@ -152,32 +176,38 @@ class Movie extends Component {
                     <Loading />
                 : 
                     <React.Fragment>
-                    <div className="Sort__Container">
-                        <ul className="sort_list">
-                            <li>|</li>
-                            <li className={ this.state.sortType ==='Popularity'?"Poster__Scale Sort__clicked":'Poster__Scale'}
-                                onClick={()=>this.handleMovieUrl('Popularity')}>
-                                    Popularity 
-                            </li>
-                            <li>|</li>
-                            <li className={ this.state.sortType ==='Ranking'?"Poster__Scale Sort__clicked":'Poster__Scale'}
-                                 onClick={()=>this.handleMovieUrl('Ranking')}>
-                                    Ranking 
-                            </li>
+                       
+                        <div className="Sort__Container">
+                        {!this.state.isSearch&&
+                            <ul className="sort_list">
+                                <li>|</li>
+                                <li className={ this.state.sortType ==='Popularity'?"Poster__Scale Sort__clicked":'Poster__Scale'}
+                                    onClick={()=>this.handleMovieUrl('Popularity')}>
+                                        Popularity 
+                                </li>
+                                <li>|</li>
+                                <li className={ this.state.sortType ==='Ranking'?"Poster__Scale Sort__clicked":'Poster__Scale'}
+                                    onClick={()=>this.handleMovieUrl('Ranking')}>
+                                        Ranking 
+                                </li>
 
-                            <li>|</li>
-                            <li className={ this.state.sortType ==='VoteCount'?"Poster__Scale Sort__clicked":'Poster__Scale'}
-                                onClick={()=>this.handleMovieUrl('VoteCount')}>
-                                    Vote Count
-                            </li>
-                            <li>|</li>
-
-                        </ul>    
-                    </div>   
-                    {this._renderItems()}
-                    {this._renderPagenation()}
+                                <li>|</li>
+                                <li className={ this.state.sortType ==='VoteCount'?"Poster__Scale Sort__clicked":'Poster__Scale'}
+                                    onClick={()=>this.handleMovieUrl('VoteCount')}>
+                                        Vote Count
+                                </li>
+                                <li>|</li>
+                            </ul>  
+                          }
+                          {!this.state.isSearch&&
+                                <SearchBar isSearch={false} />
+                          }
+                           
+                        </div>   
+                        {this._renderItems()}
+                        {this._renderPagenation()}
                     </React.Fragment>
-
+                
                 }
             </div>
         );
@@ -197,4 +227,4 @@ function MoviePoster({posterImg,alt}) {
     )
 
 }
-export default Movie;
+export default withRouter(Movie);
