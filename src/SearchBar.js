@@ -29,13 +29,21 @@ class SearchBar extends Component{
 
     handleSearch =(e) =>{
         e.preventDefault();
-        this.props.history.push(`/search/${this.state.keyword}`);
+        if(this.state.keyword !== ''){
+            this.props.history.push(`/search/${this.state.keyword}`);
+        }else{
+            alert('Please enter your search term');
+        }
 
     }
 
     handleSearchEnterKey =(e) =>{
         if(e.key == 'Enter') {
-            this.props.history.push(`/search/${this.state.keyword}`);
+            if(this.state.keyword !== ''){
+                this.props.history.push(`/search/${this.state.keyword}`);
+            }else{
+                alert('Please enter your search term');
+            }
         }
     }
     
