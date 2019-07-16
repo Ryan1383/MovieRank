@@ -6,10 +6,10 @@ import './css/Movie.css';
 import './css/App.css'
 import Loading from './Loading';
 import SearchBar from './SearchBar';
+import { Pagenation } from './Pagenation';
 
 
 
-let pageNumber = 1;
 class Movie extends Component {
 
     constructor(props){
@@ -20,8 +20,8 @@ class Movie extends Component {
           isLoading: true,
           url:'',
           sortType:'Popularity',
-          pageNumber: pageNumber,
           isSearch:false,
+          isSamePage: true,
         }
     }
 
@@ -50,11 +50,19 @@ class Movie extends Component {
     }
 
     
-    handleMovieUrl = (sortType) =>{
+    handleMovieUrl = (sortType,pagenumberParam) =>{
         let url = '';
 
+        let pageNumber = pagenumberParam === null?pageNumber : pagenumberParam;
+
         if(sortType !== this.state.sortType){
-            pageNumber = 1;
+            this.setState({
+                isSamePage:  false,
+            })
+        }else{
+            this.setState({
+                isSamePage:  true,
+            })
         }
 
         this.setState({
@@ -100,18 +108,7 @@ class Movie extends Component {
         )
     }
 
-    handlePageNumber =(type) =>{
-        if(type ==='pre'){
-           pageNumber = pageNumber-1;
-        }else if(type ==='next'){
-           pageNumber = pageNumber+1;
-        }else {
-            console.log('type not matched')
-        }
-
-        this.handleMovieUrl(this.state.sortType);
-    } 
-
+   
     
 
     _renderItems =()=>{
@@ -155,18 +152,6 @@ class Movie extends Component {
     
     }
 
-    _renderPagenation =() =>{
-        return(
-                <div className="Movie__page__buttons">
-                    <div className="Movie__page__button" onClick={()=>this.handlePageNumber('pre')}>
-                        <span>{pageNumber !==1? '←Previous' : ' '} </span>
-                    </div>
-                    <div className="Movie__page__button" onClick = {()=>this.handlePageNumber('next')}>
-                        <span>Next → </span>
-                    </div>
-                </div>
-        )
-    }
 
     render () {
         return(
@@ -177,7 +162,7 @@ class Movie extends Component {
                 : 
                     <React.Fragment>
                        
-                        <div className="Sort__Container">
+                        <div className="Sort__Container" style={this.state.isSearch?{display:'none'}:{display:'block'}}>
                         {!this.state.isSearch&&
                             <ul className="sort_list">
                                 <li>|</li>
@@ -205,7 +190,21 @@ class Movie extends Component {
                            
                         </div>   
                         {this._renderItems()}
-                        {this._renderPagenation()}
+                        {!this.state.isSearch?
+                            <Pagenation 
+                                    isSearch ={this.state.isSearch}
+                                    handlePage ={(sortType,pagenumberParam)=>this.handleMovieUrl(sortType,pagenumberParam)}
+                                    sortType = {this.state.sortType}
+                                    isSamePage = {this.state.isSamePage}
+                            />
+                        :
+                            <Pagenation 
+                                    isSearch ={this.state.isSearch}
+                                    handlePage ={(keyword,pageNumberParam)=>this.props.handlePage(keyword,pageNumberParam)}
+                                    keyword = {this.props.keyword}
+                                    isNewKeyword = {this.props.isNewKeyword}
+                            />
+                        }
                     </React.Fragment>
                 
                 }

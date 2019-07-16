@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import Movie from './Movie';
 import Loading from './Loading';
 import SearchBar from './SearchBar';
-
+import './css/SearchDetail.css'
 
  class SearchDetail extends Component{
 
@@ -16,36 +16,38 @@ import SearchBar from './SearchBar';
             searchData: {},
             isLoading: true,
             isSearch:false,
+            isNewKeyword: false,
         }
     }
 
     componentDidMount(){
         this.getAPISearchItems(this.props.match.params.keyword);
+        this.setState({
+          keyword: this.props.match.params.keyword,
+        })
     }
 
     componentWillReceiveProps(nextProps){
-        console.log('nextProps>>>',nextProps);
-        console.log('searchDetail new >>',nextProps.match.params.keyword);
         this.getAPISearchItems(nextProps.match.params.keyword);
-    }
-
-    handleSearchData =(newKeyword)=>{
-        console.log('newKeyword >>>', newKeyword);
         this.setState({
-            keyword:newKeyword,
-        });
-        this.getAPISearchItems(this.state.keyword);
+          keyword:nextProps.match.params.keyword,
+          isNewKeyword: this.props.match.params.keyword !== nextProps.match.params.keyword,
+        })
     }
 
 
-    getAPISearchItems = async(keyword)=>{
-        await fetch(`https://api.themoviedb.org/3/search/movie${API_KEY}&language=en-US&page=1&include_adult=false&query=${keyword}`)
+    getAPISearchItems = async(keyword,pageNumberParam)=>{
+      
+       let pageNumber = pageNumberParam === undefined? 1 : pageNumberParam;
+
+        await fetch(`https://api.themoviedb.org/3/search/movie${API_KEY}&language=en-US&page=${pageNumber}&include_adult=false&query=${keyword}`)
         .then(res => res.json()
         .then(res =>{
           console.log('getAPISearchItems>>>>>',res);
           this.setState({
              searchData: res.results,
              isLoading:false,
+             total_results : res.total_results,
           })
         }
         
@@ -57,17 +59,33 @@ import SearchBar from './SearchBar';
     }
 
     render(){
-
         return(
           
           <React.Fragment>  
             {this.state.isLoading?
                <Loading />
             :
-              <React.Fragment>
-                  <SearchBar isSearch={true} handleSearchData={this.handleSearchData} />
-                 <Movie searchData ={this.state.searchData} />
-              </React.Fragment>
+              <div className= "Search__datail">
+                  <SearchBar isSearch={true} />
+                  <div className = "Search__result">
+                      <div className = "Search__result__container">
+                          <h2>Search : {this.state.keyword}</h2> <span>{this.state.total_results} movies</span>
+                      </div>
+                    <hr/>
+                  </div>
+                  {this.state.total_results !== 0 ?
+                    <Movie
+                        keyword = {this.state.keyword} 
+                        handlePage = {(keyword,pageNumberParam)=>this.getAPISearchItems(keyword,pageNumberParam)}
+                        searchData ={this.state.searchData} 
+                        isNewKeyword ={this.state.isNewKeyword}
+                    />
+                    :
+                      <div className ="Search__NoResult">
+                        <h1>No results were found for your search</h1>
+                      </div>
+                  }
+              </div>
 
             }
           </React.Fragment>
