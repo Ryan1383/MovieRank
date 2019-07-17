@@ -4,6 +4,8 @@ import Loading from './Loading';
 import LinesEllipsis from 'react-lines-ellipsis'
 import './css/CastDetail.css';
 import MovieSuggestion from './MovieSuggestion';
+import NoImage from './images/noImage.png'
+
 
 function MovieCast ({match,location}) {
 
@@ -46,17 +48,17 @@ function MovieCast ({match,location}) {
         <div className="Cast__detail">
             <div className="Cast__detail_container" >
                 <div className="Cast__poster">
-                    <img src={URL_IMG+IMG_SIZE_LARGE+cast.profile_path} alt={cast.name} title={cast.name}/>
+                    <img src={cast.profile_path !== null ? URL_IMG+IMG_SIZE_LARGE+cast.profile_path : NoImage} alt={cast.name} title={cast.name}/>
                 </div>
                 
                 <div className="Cast__info">
                     <div className="Cast__title">
                         <h1>{cast.name}</h1>
                     </div>
-                    <div>
+                    <div className="Cast__overView">
                         <p>Birthday{ cast.deathday!=null&& "-Deathday"}: {cast.birthday == null?noData: cast.deathday != null? cast.birthday +' ~ '+ cast.deathday : cast.birthday}</p>
-                        <p>Known for: {cast.known_for_department}</p>
-                        <p>Place of birth: {cast.place_of_birth}</p>
+                        <p>Known for: {cast.known_for_department !== null?cast.known_for_department: noData}</p>
+                        <p>Place of birth: {cast.place_of_birth !== null?cast.place_of_birth: noData}</p>
                     </div>
                 
                     <div className="Cast__overview">

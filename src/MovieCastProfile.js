@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { URL_IMG, IMG_SIZE_LARGE,API_KEY } from './const';
 import Avatar from './images/avatar.png';
 
+
 export default class MovieCastProfile extends Component{
 
     componentDidMount(){

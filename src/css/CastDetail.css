@@ -25,6 +25,10 @@ h1,h2 {
     width:30%;
 } 
 
+.Cast__overView {
+    color:rgba(112, 102, 102, 0.849);
+}
+
 
 @media screen and (min-width:320px) and (max-width:667px){
     .Cast__detail_container{

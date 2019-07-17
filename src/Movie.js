@@ -2,6 +2,7 @@ import React, {Component}from 'react';
 import {Link,withRouter} from 'react-router-dom';
 import { URL_IMG, IMG_SIZE_LARGE,API_KEY } from './const';
 import Star from './images/star.png'
+import NoImage from './images/noImage.png'
 import './css/Movie.css';
 import './css/App.css'
 import Loading from './Loading';
@@ -118,7 +119,7 @@ class Movie extends Component {
                 <div className="Movie__Column">
                     <Link to={`/detail/${movie.id}`}>
                         <MoviePoster 
-                            posterImg = {URL_IMG+IMG_SIZE_LARGE+movie.poster_path}
+                            posterImg = {movie.poster_path !==null? URL_IMG+IMG_SIZE_LARGE+movie.poster_path: NoImage}
                             alt={movie.title}
                         />
                     </Link>
@@ -221,7 +222,6 @@ function MoviePoster({posterImg,alt}) {
             className="Movie__Poster Poster__Scale"
             title={alt}
             src ={posterImg}
-            alt={alt}
         />
     )
 

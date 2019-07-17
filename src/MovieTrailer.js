@@ -28,10 +28,12 @@ export default class MovieTrailer extends Component {
         await fetch(trailerUrl)
           .then(res => res.json())
           .then(res =>{
-            console.log('getAPIMovieTrailer>>>', res);
+            console.log('getAPIMovieTrailer>>>', res.results);
             this.setState({
-                trailer:res.results.splice(0,3)
+                trailer:res.results.splice(0,3),
+                isTrailerExist: (res.results).length !== 0,
             })
+            console.log(' trailer length >>',(res.results).length);
           })
           .catch(err =>{
               console.log(err);
@@ -39,22 +41,36 @@ export default class MovieTrailer extends Component {
       }  
     
       renderTrailers =(trailers)=>{
-        let render = trailers.map(function(trailer) {
-            return(
-              <div  key={trailer.id} >
-                <Trailer trailer={trailer.key} />
-              </div>
-            );
-          });
 
-          return render;
+        console.log('trailers >>',trailers);
+        let render;
+
+        if(trailers.length === 0){
+            
+            render = <div className="Trailer__no_content"><h2>No Trailer Data</h2></div>
+
+            return render;
+        }else{
+            render = trailers.map(function(trailer) {
+                return(
+                  <div  key={trailer.id} >
+                    <Trailer trailer={trailer.key} />
+                  </div>
+                );
+              });
+    
+              return render;
+        }
+        
+        
       }
       
     render(){
+        console.log('movie trailer exist >>', this.state.isTrailerExist)
         return(
             <div className="Movie__trailer">
                 <div className="Trailer__content">
-                    {this.renderTrailers(this.state.trailer)}
+                     {this.renderTrailers(this.state.trailer)}
                 </div>
             </div>
         )
@@ -65,7 +81,6 @@ export default class MovieTrailer extends Component {
   function Trailer({trailer}) {
     return(
         <Iframe url={URL_YOUTUBE + trailer}
-          
             className="Trailer__Iframe"
             allowFullScreen
         />
