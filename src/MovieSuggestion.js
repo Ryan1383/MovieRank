@@ -1,6 +1,8 @@
 import React ,{Component} from 'react';
 import {Link} from 'react-router-dom';
+
 import { URL_IMG, IMG_SIZE_LARGE } from './const';
+import NoImage from './images/noImage.png'
 import './css/MovieSuggestion.css';
 
 export default class MovieSuggestion extends Component {
@@ -45,6 +47,7 @@ export default class MovieSuggestion extends Component {
                 this.setState({
                     suggestion:(res.results).splice(0,4),
                     isLoading:false,
+                    total_results: res.total_results,
                 })
             }else{
                 this.setState({
@@ -66,7 +69,7 @@ export default class MovieSuggestion extends Component {
                     <Link to={`/detail/${Suggestion.id}`} >
                         <img
                             className="Suggestion__poster Poster__Scale"
-                            src ={URL_IMG+IMG_SIZE_LARGE+Suggestion.poster_path} 
+                            src ={Suggestion.poster_path !== null? URL_IMG+IMG_SIZE_LARGE+Suggestion.poster_path:NoImage} 
                             alt={Suggestion.title}
                             title={Suggestion.title}
                         />
@@ -83,7 +86,12 @@ export default class MovieSuggestion extends Component {
             <div className={!this.state.isTypeMovie?"Cast__Movie__Container":"Suggestion__movie_container"}>
                 <h2>{this.props.title}</h2>
                 <div className={this.state.isTypeMovie?"Suggestion__Movie_content":"Suggestion__Cast_content"}>
-                        {this.renderSuggestion()}
+                        {this.state.total_results !== 0?
+                           this.renderSuggestion()
+                           :
+                            <div className="Suggestion__no_content"><h3>No Suggenstion Data</h3></div>
+                        }
+
                 </div>
             </div>
         )

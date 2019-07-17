@@ -13,7 +13,12 @@
     width: 380px;
     height: 250px;
 }
-
+.Trailer__no_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgba(112, 102, 102, 0.849);
+}
 @media screen and (min-width:320px) and (max-width:667px){
     .Trailer__content{
         display: block;        

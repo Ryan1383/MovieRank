@@ -9,7 +9,7 @@ import MovieCastProfile from './MovieCastProfile';
 import MovieTrailer from './MovieTrailer';
 import MovieReviews from './MovieReviews';
 import MovieSuggestion from './MovieSuggestion';
-
+import NoImage from './images/noImage.png'
 
 function MovieDetail ({match}) {
 
@@ -78,7 +78,8 @@ function MovieDetail ({match}) {
             <React.Fragment>
                 <div className="Movie__detail_container" >
                     <div className="Movie__poster">
-                        <img src={URL_IMG+IMG_SIZE_LARGE+movieDetail.poster_path} alt={movieDetail.title} title={movieDetail.title}/>
+
+                        <img src={movieDetail.poster_path !== null?URL_IMG+IMG_SIZE_LARGE+movieDetail.poster_path:NoImage} alt={movieDetail.title} title={movieDetail.title}/>
                     </div>
                     
                     <div className="Movie__info">
@@ -114,7 +115,6 @@ function MovieDetail ({match}) {
                             
                         </div>
                         <div className="Movie__suggestion">
-                        
                            <MovieSuggestion 
                                 title={'Suggestion'}
                                 type={'movie'}

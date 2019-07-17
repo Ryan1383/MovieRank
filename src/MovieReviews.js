@@ -35,8 +35,8 @@ export default class MovieReviews extends Component {
             this.setState({
                 reviwes:res.results,
                 isLoading:false,
+                total_results: res.total_results,
             })
-            console.log((res.results).length);
             for(let i=0; i<(res.results).length; i++){
                 this.setState({
                     more:[...this.state.more,true]
@@ -79,7 +79,9 @@ export default class MovieReviews extends Component {
                         :
                       review.content
                       }
-                      <p onClick={()=>this.handleMore(index)} style={{color:'blue'}}>{this.state.more[index]===true?'more':'less'}</p>
+                      {(review.content).length >300&&
+                            <p onClick={()=>this.handleMore(index)} style={{color:'blue'}}>{this.state.more[index]===true?'more':'less'}</p>
+                      }
                 </div>
               </div>
             )
@@ -94,7 +96,11 @@ export default class MovieReviews extends Component {
                 <h2>Reviews</h2>
                 <hr/>
                 <div className="Reviwes__content">
-                        {this.renderReviews()}
+                        {this.state.total_results !== 0?
+                            this.renderReviews()
+                        :
+                            <div className="Review__no__data"><h2>No Review Data...</h2></div>
+                        }
                 </div>
             </div>
         )
