@@ -26,6 +26,8 @@
 
 * chaosmos1383@gmail.com 으로 메일을 주시면 답변을 드리겠습니다.
 
+<br/>
+
 # 차후 추가사항
 
 * Redux 및 mobx를 통한 상태관리
