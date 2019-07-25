@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/MovieRank/static/css/main.a1fb7018.chunk.css",
+    "main.js": "/MovieRank/static/js/main.0591a66f.chunk.js",
+    "main.js.map": "/MovieRank/static/js/main.0591a66f.chunk.js.map",
+    "runtime~main.js": "/MovieRank/static/js/runtime~main.bf2f4ff1.js",
+    "runtime~main.js.map": "/MovieRank/static/js/runtime~main.bf2f4ff1.js.map",
+    "static/js/2.e210c8ae.chunk.js": "/MovieRank/static/js/2.e210c8ae.chunk.js",
+    "static/js/2.e210c8ae.chunk.js.map": "/MovieRank/static/js/2.e210c8ae.chunk.js.map",
+    "index.html": "/MovieRank/index.html",
+    "precache-manifest.2932748f9652d631529cc453d1e5635e.js": "/MovieRank/precache-manifest.2932748f9652d631529cc453d1e5635e.js",
+    "service-worker.js": "/MovieRank/service-worker.js",
+    "static/css/main.a1fb7018.chunk.css.map": "/MovieRank/static/css/main.a1fb7018.chunk.css.map",
+    "static/media/avatar.png": "/MovieRank/static/media/avatar.3910ec0e.png",
+    "static/media/star.png": "/MovieRank/static/media/star.76eb9272.png"
+  }
+}
