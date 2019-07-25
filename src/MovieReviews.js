@@ -3,7 +3,6 @@ import {API_KEY } from './const';
 import './css/MovieReviews.css';
 import LinesEllipsis from 'react-lines-ellipsis'
 
-
 export default class MovieReviews extends Component {
 
     constructor(props){
@@ -98,6 +97,7 @@ export default class MovieReviews extends Component {
                 <div className="Reviwes__content">
                         {this.state.total_results !== 0?
                             this.renderReviews()
+                            
                         :
                             <div className="Review__no__data"><h2>No Review Data...</h2></div>
                         }

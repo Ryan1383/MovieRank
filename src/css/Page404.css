@@ -1,0 +1,12 @@
+.Not__Container {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.Not__Container h1 {
+    color:rgba(112, 102, 102, 0.849);
+}

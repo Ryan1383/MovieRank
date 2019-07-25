@@ -7,6 +7,8 @@ import Header from './Header';
 import MovieDetail from './MovieDetail';
 import MovieCast from './MovieCast';
 import SearchDetail from './SearchDetail';
+import Footer from './Footer';
+import Page404 from './Page404';
 
 class App extends Component {
 
@@ -20,7 +22,9 @@ class App extends Component {
             <Route path="/detail/:id" component={MovieDetail} />
             <Route path="/cast/:id" component={MovieCast} />
             <Route path="/search/:keyword" component={SearchDetail} />
+            <Route component={Page404} />
           </Switch>
+          <Footer/>
         </Router>
       </React.Fragment>
 
