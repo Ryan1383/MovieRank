@@ -1,5 +1,6 @@
-# MovieRank (with ReactJS)
-
+# MovieRank (with ReactJS) 
+ * 페이지 확인 : https://ryan1383.github.io/MovieRank/#/
+ 
  * 특징
  1. 인기순, 평점순, 투표순의 리스트를 각 페이지별 20개로 정렬
  2. 영화 상세내용 제공 (참여배우, 영화상세정보, 영화트레일러, 영화 리뷰)
