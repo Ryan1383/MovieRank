@@ -19,4 +19,8 @@
 
 * The Movie DataBase ( https://developers.themoviedb.org/3/movies/get-movie-details )의 API를 사용한 데이터 처리.
 
+# 문의사항
+
+* chaosmos1383@gmail.com 으로 메일을 주시면 답변을 드리겠습니다.
+
 
