@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import SearchIMG from './images/search.png';
+import SearchIMG from './../images/search.png';
 import { withRouter } from "react-router-dom";
-import './css/Search.css';
+import './../css/Search.css';
 
 
 class SearchBar extends Component{

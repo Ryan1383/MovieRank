@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import './css/Page404.css';
+import './../css/Page404.css';
 
 export default class Page404 extends Component{
 

@@ -1,13 +1,15 @@
 import React, {Component}from 'react';
 import {Link,withRouter} from 'react-router-dom';
-import { URL_IMG, IMG_SIZE_LARGE,API_KEY } from './const';
+import LinesEllipsis from 'react-lines-ellipsis'
+
+import { URL_IMG, IMG_SIZE_LARGE,API_KEY,URL_LIST } from './const';
 import Star from './images/star.png'
 import NoImage from './images/noImage.png'
 import './css/Movie.css';
 import './css/App.css'
 import Loading from './Loading';
-import SearchBar from './SearchBar';
-import { Pagenation } from './Pagenation';
+import SearchBar from './component/SearchBar';
+import { Pagenation } from './component/Pagenation';
 
 class Movie extends Component {
 
@@ -72,13 +74,13 @@ class Movie extends Component {
         })
         console.log(sortType);
         if(sortType === 'Popularity'){
-                url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=${pageNumber}`
+                url = `${URL_LIST}${API_KEY}&page=${pageNumber}`
         }else if(sortType === 'Ranking'){
-                url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=${pageNumber}&sort_by=vote_average.desc`
+                url = `${URL_LIST}${API_KEY}&page=${pageNumber}&sort_by=vote_average.desc`
         }else if(sortType === 'VoteCount'){
-                url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=${pageNumber}&sort_by=vote_count.desc`
+                url = `${URL_LIST}${API_KEY}&page=${pageNumber}&sort_by=vote_count.desc`
         }else{
-            url = `https://api.themoviedb.org/3/discover/movie${API_KEY}&page=${pageNumber}`
+            url = `${URL_LIST}${API_KEY}&page=${pageNumber}`
         }
 
         this.setState({
@@ -137,6 +139,14 @@ class Movie extends Component {
                             <span>{movie.vote_average}</span>
                         </div>
                     </div>
+                    <div className="Movie__overview">
+                        <LinesEllipsis
+                                text={movie.overview}
+                                maxLine='3'
+                                trimRight
+                                basedOn='letters'
+                            />   
+                        </div>
                     <div className="Movie__Genres">
                         {movie.genre_ids.map((genre,index) =>
                             (

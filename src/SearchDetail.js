@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { URL_IMG, IMG_SIZE_LARGE,API_KEY } from './const';
+import { URL_IMG, IMG_SIZE_LARGE,API_KEY,URL_SEARCH } from './const';
 import { withRouter } from "react-router-dom";
 import Movie from './Movie';
 import Loading from './Loading';
-import SearchBar from './SearchBar';
+import SearchBar from './component/SearchBar';
 import './css/SearchDetail.css'
 
  class SearchDetail extends Component{
@@ -40,7 +40,7 @@ import './css/SearchDetail.css'
       
        let pageNumber = pageNumberParam === undefined? 1 : pageNumberParam;
 
-        await fetch(`https://api.themoviedb.org/3/search/movie${API_KEY}&language=en-US&page=${pageNumber}&include_adult=false&query=${keyword}`)
+        await fetch(`${URL_SEARCH}${API_KEY}&language=en-US&page=${pageNumber}&include_adult=false&query=${keyword}`)
         .then(res => res.json()
         .then(res =>{
           console.log('getAPISearchItems>>>>>',res);

@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import LinesEllipsis from 'react-lines-ellipsis'
 
-import { URL_IMG, IMG_SIZE_LARGE,API_KEY,CAST_MAX_NUM } from './const';
+import { URL_IMG, IMG_SIZE_LARGE,API_KEY,CAST_MAX_NUM,URL_DETAIL,URL_CAST } from './const';
 import './css/MovieDetail.css';
 import Loading from './Loading';
 import Star from './images/star.png'
@@ -30,7 +30,7 @@ function MovieDetail ({match}) {
     const MAX_CAST_NUM = CAST_MAX_NUM;
 
     const getAPIMovieDetail =async()=>{
-       await fetch(`https://api.themoviedb.org/3/movie/${movie.id}${API_KEY}`)
+       await fetch(`${URL_DETAIL}${movie.id}${API_KEY}`)
         .then(res => res.json())
         .then(res =>{
             console.log('getAPIMovieDetail >>>>',res);       
@@ -48,7 +48,7 @@ function MovieDetail ({match}) {
       }
 
     const getAPIMovieCast =async(id)=>{
-      await  fetch(`https://api.themoviedb.org/3/movie/${movie.id}/casts${API_KEY}`)
+      await  fetch(`${URL_DETAIL}${movie.id}${URL_CAST}${API_KEY}`)
         .then(res => res.json())
         .then(res =>{
             console.log('getAPIMovieCast >>>>',res);       
@@ -93,11 +93,11 @@ function MovieDetail ({match}) {
                                 alt={'Rating star'}
                             />
                             <span>{movieDetail.vote_average}</span>
-                            {movieDetail.runtime !== undefined&&
-                                <span className="Movie__runtime">
-                                    {`${movieDetail.runtime}분`}
-                                </span>
-                            }
+                                {movieDetail.runtime !== null&&
+                                    <span className="Movie__runtime">
+                                        {`${movieDetail.runtime}분`}
+                                    </span>
+                                }
                         </div>
                     
                         <div className="Movie__genres">
@@ -108,7 +108,7 @@ function MovieDetail ({match}) {
                         <div className="Movie__overview">
                         <LinesEllipsis
                             text={movieDetail.overview}
-                            maxLine='8'
+                            maxLine='7'
                             trimRight
                             basedOn='letters'
                         />   
@@ -119,7 +119,7 @@ function MovieDetail ({match}) {
                                 title={'Suggestion'}
                                 type={'movie'}
                                 url={`https://api.themoviedb.org/3/movie/${match.params.id}/similar${API_KEY}&language=en-US&page=1`} 
-                            />
+                        />
                         </div>
                     </div>
 

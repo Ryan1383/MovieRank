@@ -3,12 +3,12 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import './css/App.css';
 import Movie from './Movie';
-import Header from './Header';
+import Header from './component/Header';
 import MovieDetail from './MovieDetail';
 import MovieCast from './MovieCast';
 import SearchDetail from './SearchDetail';
-import Footer from './Footer';
-import Page404 from './Page404';
+import Footer from './component/Footer';
+import Page404 from './component/Page404';
 
 class App extends Component {
 

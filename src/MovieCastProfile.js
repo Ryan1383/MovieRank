@@ -1,6 +1,6 @@
 import React ,{Component} from 'react';
 import {Link} from 'react-router-dom';
-import { URL_IMG, IMG_SIZE_LARGE,API_KEY } from './const';
+import { URL_IMG, IMG_SIZE_LARGE,API_KEY,URL_PERSON } from './const';
 import Avatar from './images/avatar.png';
 
 
@@ -19,13 +19,12 @@ export default class MovieCastProfile extends Component{
     }
      getAPIMovieCastProfile =async(personId)=>{
        
-        await fetch(` https://api.themoviedb.org/3/person/${personId}${API_KEY}`)
+        await fetch(` ${URL_PERSON}${personId}${API_KEY}`)
           .then(res => res.json())
           .then(res =>{
               if(res.profile_path !== null){
                 this.setState({
                     cast:res,
-                    
                     profile_path:res.profile_path
                   })
               }else{

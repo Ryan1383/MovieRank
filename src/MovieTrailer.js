@@ -1,7 +1,8 @@
 import React ,{Component} from 'react';
+import {URL_DETAIL,URL_VIDEO} from './const';
 import Iframe from 'react-iframe'
 
-import { URL_YOUTUBE,API_KEY } from './const';
+import { URL_YOUTUBE,API_KEY,TRAILER_MAX_NUM } from './const';
 import './css/MovieTrailer.css';
 
 export default class MovieTrailer extends Component {
@@ -23,14 +24,14 @@ export default class MovieTrailer extends Component {
  
     }
     getAPIMovieTrailer =async(movieId)=>{
-        const trailerUrl = `https://api.themoviedb.org/3/movie/${movieId}/videos${API_KEY}`
+        const trailerUrl = `${URL_DETAIL}${movieId}${URL_VIDEO}${API_KEY}`
        
         await fetch(trailerUrl)
           .then(res => res.json())
           .then(res =>{
             console.log('getAPIMovieTrailer>>>', res.results);
             this.setState({
-                trailer:res.results.splice(0,3),
+                trailer:res.results.splice(0,TRAILER_MAX_NUM),
                 isTrailerExist: (res.results).length !== 0,
             })
             console.log(' trailer length >>',(res.results).length);
