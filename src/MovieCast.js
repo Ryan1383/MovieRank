@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { URL_IMG, IMG_SIZE_LARGE,API_KEY } from './const';
+import { URL_IMG, IMG_SIZE_LARGE,API_KEY,URL_PERSON } from './const';
 import Loading from './Loading';
 import LinesEllipsis from 'react-lines-ellipsis'
 import './css/CastDetail.css';
@@ -24,7 +24,7 @@ function MovieCast ({match,location}) {
 
     const getAPICastMovieList =async(personId)=>{
        
-        await fetch(` https://api.themoviedb.org/3/person/${personId}/movie_credits${API_KEY}`)
+        await fetch(`${URL_PERSON}${personId}/movie_credits${API_KEY}`)
           .then(res => res.json())
           .then(res =>{
             console.log('getAPICastMovieList>>>', res);
@@ -74,7 +74,7 @@ function MovieCast ({match,location}) {
                     <MovieSuggestion 
                             title={'Movies'}
                             type={'cast'}
-                            url={`https://api.themoviedb.org/3/person/${match.params.id}/movie_credits${API_KEY}`} 
+                            url={`${URL_PERSON}${match.params.id}/movie_credits${API_KEY}`} 
                     />
                 </div>
             </div>

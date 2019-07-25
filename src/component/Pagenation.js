@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './css/Movie.css';
+import './../css/Movie.css';
 
 let pageNumber = 1;
 let searchPagenumber = 1;

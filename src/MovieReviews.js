@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import {API_KEY } from './const';
+import {API_KEY,URL_DETAIL } from './const';
 import './css/MovieReviews.css';
 import LinesEllipsis from 'react-lines-ellipsis'
 
@@ -25,7 +25,7 @@ export default class MovieReviews extends Component {
     }
     getAPIMovieReviwes =async(movieId)=>{
        
-        const reviwes = `https://api.themoviedb.org/3/movie/${movieId}/reviews${API_KEY}&language=en-US&page=1`
+        const reviwes = `${URL_DETAIL}${movieId}/reviews${API_KEY}&language=en-US&page=1`
        
         await fetch(reviwes)
           .then(res => res.json())

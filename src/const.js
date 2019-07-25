@@ -1,5 +1,5 @@
 export const URL_LIST = 'https://api.themoviedb.org/3/discover/movie';
-export const URL_SEARCH = 'https://api.themoviedb.org/3/search/movie?query=';
+export const URL_SEARCH = 'https://api.themoviedb.org/3/search/movie';
 export const URL_DETAIL = 'https://api.themoviedb.org/3/movie/';
 export const URL_PERSON = 'https://api.themoviedb.org/3/person/';
 export const URL_IMG = 'https://image.tmdb.org/t/p/';
