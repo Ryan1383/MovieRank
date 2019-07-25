@@ -79,7 +79,6 @@ function MovieCast ({match,location}) {
                 </div>
             </div>
         </div>
-
         }
         </React.Fragment>
     )

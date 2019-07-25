@@ -9,8 +9,6 @@ import Loading from './Loading';
 import SearchBar from './SearchBar';
 import { Pagenation } from './Pagenation';
 
-
-
 class Movie extends Component {
 
     constructor(props){
@@ -44,10 +42,13 @@ class Movie extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log( 'movie.js received >>',nextProps);
-        this.setState({
-            movies: nextProps.searchData,
-        })
+        if(nextProps.searchData !== undefined){
+            this.setState({
+                movies: nextProps.searchData,
+            })
+        }else{
+            this.handleMovieUrl('Popularity');
+        }
     }
 
     
@@ -156,6 +157,7 @@ class Movie extends Component {
 
     render () {
         return(
+            <React.Fragment>
             <div className={!this.state.isLoading?"App":"App--loading"}>
                         
                 {this.state.isLoading?
@@ -209,7 +211,9 @@ class Movie extends Component {
                     </React.Fragment>
                 
                 }
+
             </div>
+           </React.Fragment>
         );
     }
 }

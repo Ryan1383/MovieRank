@@ -70,6 +70,7 @@ function MovieDetail ({match}) {
     }  
 
     return(
+        <React.Fragment>
         <div className="Movie__detail">
         {isLoading?
         
@@ -81,7 +82,6 @@ function MovieDetail ({match}) {
 
                         <img src={movieDetail.poster_path !== null?URL_IMG+IMG_SIZE_LARGE+movieDetail.poster_path:NoImage} alt={movieDetail.title} title={movieDetail.title}/>
                     </div>
-                    
                     <div className="Movie__info">
                         <div className="Movie__title">
                             <h1>{movieDetail.original_title}</h1>
@@ -148,6 +148,7 @@ function MovieDetail ({match}) {
             </React.Fragment>
         }
         </div>
+       </React.Fragment>
     )
 
 
