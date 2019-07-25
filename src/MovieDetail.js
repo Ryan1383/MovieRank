@@ -79,7 +79,6 @@ function MovieDetail ({match}) {
             <React.Fragment>
                 <div className="Movie__detail_container" >
                     <div className="Movie__poster">
-
                         <img src={movieDetail.poster_path !== null?URL_IMG+IMG_SIZE_LARGE+movieDetail.poster_path:NoImage} alt={movieDetail.title} title={movieDetail.title}/>
                     </div>
                     <div className="Movie__info">
