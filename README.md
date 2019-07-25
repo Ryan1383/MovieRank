@@ -1,4 +1,4 @@
-# 영화 인기순위 리스트 (ReactJS)
+# MovieRank (with ReactJS)
 
  * 특징
  1. 인기순, 평점순, 투표순의 리스트를 각 페이지별 20개로 정렬
