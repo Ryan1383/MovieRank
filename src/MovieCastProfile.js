@@ -52,12 +52,13 @@ export default class MovieCastProfile extends Component{
             >         
                 <img  
                     style={{width:30,height:30,borderRadius:50,resize:'contain'}} 
-                    src ={this.state.profile_path !== null?
+                    src ={this.state.profile_path !== ''?
                             URL_IMG+IMG_SIZE_LARGE+this.state.profile_path
                         :
                             Avatar
                         } 
                     alt={this.state.cast.name}
+                    title={this.state.cast.name}
                 />
                 <span style={{fontSize:12,paddingLeft:5}}><span style={{color:'blue'}}>{this.props.name}</span> as {this.props.character}</span>
             </Link>
