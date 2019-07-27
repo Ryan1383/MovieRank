@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1a0ee6d70774651f6626f188000f788f",
+    "revision": "1d68263c005ce81a684554e977437ccf",
     "url": "/MovieRank/index.html"
   },
   {
-    "revision": "6917eed17c7112713cb1",
+    "revision": "e5cfa60e84acba683baa",
     "url": "/MovieRank/static/css/main.2431c775.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/MovieRank/static/js/2.1b96ec15.chunk.js"
   },
   {
-    "revision": "6917eed17c7112713cb1",
-    "url": "/MovieRank/static/js/main.d0fe52bd.chunk.js"
+    "revision": "e5cfa60e84acba683baa",
+    "url": "/MovieRank/static/js/main.2261b3c8.chunk.js"
   },
   {
     "revision": "221b558202da86baff51",

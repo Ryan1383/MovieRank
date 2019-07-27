@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/MovieRank/static/css/main.2431c775.chunk.css",
-    "main.js": "/MovieRank/static/js/main.d0fe52bd.chunk.js",
-    "main.js.map": "/MovieRank/static/js/main.d0fe52bd.chunk.js.map",
+    "main.js": "/MovieRank/static/js/main.2261b3c8.chunk.js",
+    "main.js.map": "/MovieRank/static/js/main.2261b3c8.chunk.js.map",
     "runtime~main.js": "/MovieRank/static/js/runtime~main.bf2f4ff1.js",
     "runtime~main.js.map": "/MovieRank/static/js/runtime~main.bf2f4ff1.js.map",
     "static/js/2.1b96ec15.chunk.js": "/MovieRank/static/js/2.1b96ec15.chunk.js",
     "static/js/2.1b96ec15.chunk.js.map": "/MovieRank/static/js/2.1b96ec15.chunk.js.map",
     "index.html": "/MovieRank/index.html",
-    "precache-manifest.122a721f4f407a70a30d3ab7a18ea35d.js": "/MovieRank/precache-manifest.122a721f4f407a70a30d3ab7a18ea35d.js",
+    "precache-manifest.35f95a32d0562cfbf35f77aeaa897739.js": "/MovieRank/precache-manifest.35f95a32d0562cfbf35f77aeaa897739.js",
     "service-worker.js": "/MovieRank/service-worker.js",
     "static/css/main.2431c775.chunk.css.map": "/MovieRank/static/css/main.2431c775.chunk.css.map",
     "static/media/avatar.png": "/MovieRank/static/media/avatar.3910ec0e.png",
