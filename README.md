@@ -1,5 +1,4 @@
 # MovieRank (with ReactJS) 
- * 페이지 확인 : https://ryan1383.github.io/MovieRank/#/
  
  * 특징
   1. 인기순, 평점순, 투표순의 리스트를 각 페이지별 20개로 정렬
@@ -19,12 +18,6 @@
 # REST API 사용
 
 * The Movie DataBase ( https://developers.themoviedb.org/3/movies/get-movie-details )의 API를 사용한 데이터 처리.
-
-<br/>
-
-# 문의사항
-
-* chaosmos1383@gmail.com 으로 메일을 주시면 답변을 드리겠습니다.
 
 <br/>
 
